@@ -34,9 +34,10 @@ jobs:
           git show $(git log --all -i --grep='2.20.0' --pretty=format:"%H" -1 code/changelog.md) | grep '+-' | sed 's/+-/-/g'
 
       - name: Create commit comment
-        with:
-          body: |
-            This is a multi-line test comment
+        run: |
+          MESSAGE = "This is a multi-line test comment
             - With GitHub 
-            - Created by [commit-comment][1]
+            - Created by [commit-comment][1]"
+          gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
+            
 
