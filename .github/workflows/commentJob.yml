@@ -34,7 +34,6 @@ jobs:
           git show $(git log --all -i --grep='2.20.0' --pretty=format:"%H" -1 code/changelog.md) | grep '+-' | sed 's/+-/-/g'
 
       - name: Create commit comment
-        uses: peter-evans/commit-comment@v2
         with:
           body: |
             This is a multi-line test comment
