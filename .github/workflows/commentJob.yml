@@ -25,6 +25,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          MESSAGE= "$(linea primera
+          MESSAGE= $(linea primera
           linea segunda
-          linea tercera)"
+          linea tercera)
