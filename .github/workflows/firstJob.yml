@@ -34,7 +34,6 @@ jobs:
         with:
           body: |
             This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
+            - With GitHub 
             - Created by [commit-comment][1]
 
-            [1]: https://github.com/peter-evans/commit-comment
