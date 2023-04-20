@@ -32,9 +32,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          #MESSAGE = "This is a multi-line test comment
-          #  - With GitHub 
-          # - Created by "
           gh pr comment ${{ github.event.number }} --body "$(echo -e "Hello, world!")"
             
 
