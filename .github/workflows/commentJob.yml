@@ -21,13 +21,13 @@ jobs:
 
       - name: check changelog
         run: |
-          git show $(git log --all -i --grep='2.20.0' --pretty=format:"%H" -1 code/changelog.md) | grep '+-' | sed 's/+-/-/g'
+          git show $(git log --all -i --grep='2.20.0' --pretty=format:"%H" -1 code/changelog.md)
 
       - name: Create commit comment
         run: |
-          MESSAGE = "This is a multi-line test comment
-            - With GitHub 
-            - Created by "
+          #MESSAGE = "This is a multi-line test comment
+          #  - With GitHub 
+          # - Created by "
           gh pr comment ${{ github.event.number }} --body "$(echo -e "Hello, world!")"
             
 
