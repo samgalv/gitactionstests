@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create commit comment
+      - name: check changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -26,5 +26,9 @@ jobs:
           linea segunda
           linea tercera
           "
-          
+
+      - name: Create commit comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
