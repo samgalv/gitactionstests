@@ -18,6 +18,8 @@ jobs:
           fetch-depth: 0
 
       - name: check changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo $(./changelog.md)
 
