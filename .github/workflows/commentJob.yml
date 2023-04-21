@@ -19,7 +19,7 @@ jobs:
 
       - name: check changelog
         run: |
-          echo ${{changelog.md}}
+          echo "${{changelog.md}}"
 
       - name: Create commit comment
         env:
