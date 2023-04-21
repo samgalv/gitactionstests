@@ -19,7 +19,7 @@ jobs:
 
       - name: check changelog
         run: |
-          git show $(git log --all -i --grep='2.20.0' --pretty=format:"%H" -1 code/changelog.md)
+          echo $(/changelog.md)
 
       - name: Create commit comment
         env:
