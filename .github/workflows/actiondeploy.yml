@@ -16,3 +16,8 @@ jobs:
             git checkout ${{ github.event.pull_request.head.ref }}
             git push origin HEAD
           fi
+      - name: Create deployment comment
+          uses: peter-evans/create-or-update-comment@v1
+          with:
+            body: 'Se ha realizado el despliegue con éxito!'
+            issue-number: ${{ github.event.number }}
