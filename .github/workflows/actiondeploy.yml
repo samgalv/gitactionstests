@@ -1,7 +1,7 @@
 name: Deploy on Comment
 
 on:
-  issue_comment:
+  pull_request_review_comment:
     types: [created]
 
 jobs:
@@ -13,6 +13,6 @@ jobs:
       - name: Deploy code
         run: |
           if [ "${{ github.event.comment.body }}" == "deploy" ]; then
-            git checkout ${{ github.event.issue.head.ref }}
+            git checkout ${{ github.event.pull_request.head.ref }}
             git push origin HEAD
           fi
