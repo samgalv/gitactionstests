@@ -21,7 +21,6 @@ jobs:
       - name: Create comment on pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
         if: [ "${{ github.event.issue.pull_request }}" != "null" ]; then
           MESSAGE="
           linea primera
