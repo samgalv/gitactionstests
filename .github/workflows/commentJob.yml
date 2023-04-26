@@ -19,8 +19,6 @@ jobs:
           fetch-depth: 0
 
       - name: Create comment on pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: [ "${{ github.event.issue.pull_request }}" != "null" ]; then
           MESSAGE="
           linea primera
@@ -34,5 +32,7 @@ jobs:
           Create comment on issue
           "
         fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
