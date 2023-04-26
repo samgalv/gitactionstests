@@ -19,19 +19,18 @@ jobs:
           fetch-depth: 0
 
       - name: Create comment on pr
-        if: [ "${{ github.event.issue.pull_request }}" != "null" ]; then
+        if: github.event.issue.pull_request
           MESSAGE="
           linea primera
           linea segunda
           Create comment on pr
           "
-        else
+        else: !github.event.issue.pull_request
           MESSAGE="
           linea primera
           linea segunda
           Create comment on issue
           "
-        fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
