@@ -4,6 +4,8 @@ on:
   issue_comment:
     types: [ created ]
     condition: contains(github.event.comment.body, 'deploy') && github.event.issue.pull_request
+    branches:
+      - feature/rama_prueba
   
 permissions:
   contents: 'read'
