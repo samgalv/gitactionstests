@@ -1,7 +1,11 @@
 name: comments
 
 on:
-  push
+  issue_comment:
+    types: [ created ]
+    branches:
+      - main
+      - 'releases/**'
 
 permissions:
   contents: 'read'
@@ -17,12 +21,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create commit comment
+      - name: Create comment on pr
+        if: ${{ github.event.issue.pull_request }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           MESSAGE="
           linea primera
           linea segunda
+          Create comment on pr
           "
           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
+
+      - name: Create comment on issue
+          if: ${{ !github.event.issue.pull_request }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            MESSAGE="
+            linea primera
+            linea segunda
+            Create comment on issue
+            "
+            gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
