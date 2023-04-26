@@ -1,8 +1,13 @@
-name: Deploy on Comment
-
+name: Deploy branch
 on:
-  pull_request_review_comment:
-    types: [created]
+  push:
+    branches:
+      - '*'
+
+permissions:
+  contents: 'write'
+  id-token: 'write'
+  issues: 'write' #__This fixed the HttpError: Resource not accessible by integration
 
 jobs:
   deploy:
@@ -10,9 +15,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Deploy code
-        run: |
-          if [ "${{ github.event.comment.body }}" == "deploy" ]; then
-            git checkout ${{ github.event.pull_request.head.ref }}
-            git push origin HEAD
-          fi
+        with:
+          ref: ${{ github.event.ref }}
+      - name: Build
+        run: npm run build # o el comando que utilices para generar el build
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: build # o el directorio donde se encuentra el build
