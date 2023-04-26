@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          if [[ "${{ github.event.comment.body }}" == *"deploy"* ]]; then
+          if [[ "${{ github.event.comment.body }}" == "deploy" ]]; then
              MESSAGE="lee el comentario"
           else
             MESSAGE="no lee una mierda"
