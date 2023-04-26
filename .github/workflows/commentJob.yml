@@ -24,6 +24,5 @@ jobs:
           MESSAGE="
           linea primera
           linea segunda
-          linea tercera
           "
           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
