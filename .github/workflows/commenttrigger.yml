@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           MESSAGE="default message"
-          if: ${{ github.event.issue.pull_request }}
+          if: ${{ github.event.issue.pull_request }} != "null"
           MESSAGE="
           linea primera
           linea segunda
