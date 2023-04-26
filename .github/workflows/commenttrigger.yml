@@ -3,6 +3,7 @@ name: commentstrigger
 on:
   issue_comment:
     types: [ created ]
+    condition: contains(github.event.comment.body, 'deploy') && github.event.issue.pull_request
   
 permissions:
   contents: 'read'
@@ -22,10 +23,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          if [[ "${{ github.event.comment.body }}" == "deploy" ]]; then
-             MESSAGE="lee el comentario"
-             gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
-          else
-            MESSAGE="no lee una mierda"
-            gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
-          fi
+           MESSAGE="lee el comentario"
+           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
+
+
