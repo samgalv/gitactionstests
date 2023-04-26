@@ -24,7 +24,8 @@ jobs:
         run: | 
           if [[ "${{ github.event.comment.body }}" == "deploy" ]]; then
              MESSAGE="lee el comentario"
+             gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
           else
             MESSAGE="no lee una mierda"
+            gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
           fi
-          gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
