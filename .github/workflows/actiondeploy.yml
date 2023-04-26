@@ -1,8 +1,7 @@
 name: Deploy on Comment
 
 on:
-  pull_request_review_comment:
-    types: [created]
+  push
 
 jobs:
   deploy:
