@@ -1,9 +1,8 @@
 name: commentstrigger
 
 on:
-  issue_comment:
-    types: [ created ]
-
+  push
+  
 permissions:
   contents: 'read'
   id-token: 'write'
@@ -19,20 +18,15 @@ jobs:
           fetch-depth: 0
 
       - name: Create comment on pr
-        if: [ "${{ github.event.issue.pull_request }}" != "null" ]; then
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          MESSAGE="default message"
+          if: "${{ github.event.issue.pull_request }}"
           MESSAGE="
           linea primera
           linea segunda
           Create comment on pr
           "
-        else
-          MESSAGE="
-          linea primera
-          linea segunda
-          Create comment on issue
-          "
-        fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+          fi
           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
