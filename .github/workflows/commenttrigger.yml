@@ -21,13 +21,10 @@ jobs:
       - name: Create comment on pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          MESSAGE="default message"
-          if: "${{ github.event.issue.pull_request }}"
-          MESSAGE="
-          linea primera
-          linea segunda
-          Create comment on pr
-          "
+        run: | 
+          if [[ "${{ github.event.comment.body }}" == *"deploy"* ]]; then
+             MESSAGE="lee el comentario"
+          else
+            MESSAGE="no lee una mierda"
           fi
           gh pr comment ${{ github.event.number }} --body "$(echo -e "$MESSAGE")"
